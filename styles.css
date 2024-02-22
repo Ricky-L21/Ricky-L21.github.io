@@ -1,0 +1,38 @@
+body {
+    background-color: burlywood;
+}
+
+body .body {
+    background-color: burlywood;
+    padding: 1%;
+}
+
+.navbar {
+    background-color: lightgreen;
+}
+.navbar a {
+    float: left;
+    text-align: center;
+    padding: 10px 12px;
+    border-width: 2%;
+    border-color: blueviolet;
+    background-color: coral;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: blanchedalmond;
+}
+
+.row1 {
+}
+
+.row1 .img1orange {
+    width: 70%;
+    height: 70%;
+}
+
+body .Orange {
+    color: orange;
+}
+
