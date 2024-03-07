@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <title>Lab 4</title>
+</head>
+<body>
+    <div class="navbar align-items-start">
+        <a class="border col" href="index.html">Home</a>
+        <a class="border col" href="lab3.html">Lab3</a>
+        <a class= "border col" href= "lab4.html">Lab4</a>
+        <span class="col-9"></span>
+        
+    </div>
+
+    <script>
+        document.writeln("<h1>Fruit Store</h1>")
+        window.alert("Welcome to the fruits store")
+
+        var name,item,amount;
+        name = window.prompt("Please enter your name", "Guest");
+        item = window.prompt("What fruit interests you?", "");
+        amount = window.prompt("How many do you want?", "Empty");
+
+        now = new Date();
+        hour = now.getHours();
+        day = now.getDate();
+        monthName = now.toLocaleString('default', { month: 'long' });
+        if (hour < 12) {
+            document.write("<h1> Good Morning ")} 
+        else if (hour > 18) {
+            document.write("<h1> Good Afternoon ")
+        } 
+        else {
+            document.write("<h1> Good Evening ")
+        }
+
+        document.writeln(name + ", Your order is: <br>" + item + ": " + amount + " <br> and will arrive on " + monthName + " " + (day + 7) + "</h1>")
+
+    </script>
+</body>
+</html>
