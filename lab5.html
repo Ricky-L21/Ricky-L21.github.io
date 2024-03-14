@@ -24,35 +24,42 @@
 
             if (fname == "" || fname == null){
                 alert("Enter First Name Please");
+                document.getElementById("display").innerHTML = "Unsuccessful, Fill out First Name please";
                 return;
             }
             if (lname == "" || lname == null){
                 alert("Enter Last Name Please");
+                document.getElementById("display").innerHTML = "Unsuccessful, Fill out Last Name please";
                 return;
             }
 
             if (email == "" || email == null){
                 alert("Enter an Email Please");
+                document.getElementById("display").innerHTML = "Unsuccessful, Fill out Email please";
                 return;
             } 
             else if (!email.includes("@") && !email.includes("."))
             {
                 alert("Enter a Valid Email Please");
+                document.getElementById("display").innerHTML = "Unsuccessful, Fill out Email with @ and . please";
                 return;
             }
 
             if (password == "" || password == null){
                 alert("Create a Password Please");
+                document.getElementById("display").innerHTML = "Unsuccessful, Fill out Password please";
                 return;
             }
             else if (!/[!?]/.test(password))
             {
                 alert("Create Password with either ! or ? or both Please");
+                document.getElementById("display").innerHTML = "Unsuccessful, Password requires ! ? or both";
                 return;
             }
 
             if (dateofbirth == "" || dateofbirth == null){
                 alert("Enter Date of Birth Please");
+                document.getElementById("display").innerHTML = "Unsuccessful, Fill out Date of Birth please";
                 return;
             }
             var lenpass = password.length;
