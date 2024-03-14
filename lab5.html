@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <title>Lab5</title>
+
+    <script>
+        function createAcc() {
+/*          var elements = document.getElementById("caform").elements;
+            var elemArr = Array.from(elements);
+            var submission = {};
+            elemArr.forEach((element) => console.log(element.id + " " + element.value)); */
+
+            var fname = document.getElementById("firstname").value;
+            var lname = document.getElementById("lastname").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var dateofbirth = document.getElementById("dob").value;
+
+            if (fname == "" || fname == null){
+                alert("Enter First Name Please");
+                return;
+            }
+            if (lname == "" || lname == null){
+                alert("Enter Last Name Please");
+                return;
+            }
+
+            if (email == "" || email == null){
+                alert("Enter an Email Please");
+                return;
+            } 
+            else if (!email.includes("@") && !email.includes("."))
+            {
+                alert("Enter a Valid Email Please");
+                return;
+            }
+
+            if (password == "" || password == null){
+                alert("Create a Password Please");
+                return;
+            }
+            else if (!/[!?]/.test(password))
+            {
+                alert("Create Password with either ! or ? or both Please");
+                return;
+            }
+
+            if (dateofbirth == "" || dateofbirth == null){
+                alert("Enter Date of Birth Please");
+                return;
+            }
+            var lenpass = password.length;
+            var replacedpw = '';
+            for (var i = 0; i < lenpass; i++) {
+            replacedpw += '*';
+            }
+            password = replacedpw;
+
+            var user = {
+                FirstName: fname,
+                LastName: lname,
+                Email: email,
+                Password: password,
+                DateofBirth: dateofbirth
+            };
+            
+            // console.log(lenpass)
+            console.log(user)
+
+            document.getElementById("display").innerHTML =
+            "Congrats! Your account has been made! Here are the details:" + "<br>" +
+            "First Name: " + user.FirstName + "<br>" + "Last Name: " + user.LastName + "<br>" + "Email: " + user.Email + "<br>" + "Password: " + user.Password + "<br>" + "Date of Birth: " + user.DateofBirth;
+        }
+    </script>
+
+</head>
+<body>
+    <div class="navbar align-items-start">
+        <button class="border col" href="index.html">Home</button>
+        <button class="border col" href="lab3.html">Lab3</button>
+        <button class= "border col" href= "lab4.html">Lab4</button>
+        <button class= "border col" href="lab5.html">Lab5</button>
+        <span class="col-6"></span>
+        
+    </div>
+    <div class="row">
+        <div class="box box1 col-8">
+            <div class="formbox">
+            <form id="caform">
+                First Name: <input type="text" id="firstname"><br>
+                Last Name: <input type="text" id="lastname"><br>
+                Email: <input type="text" id="email"><br>
+                Password: <input type="text" id="password"><br>
+                Date of Birth: <input type="date" id="dob"><br>
+            </form>
+            <button onclick="createAcc()">Create Account</button>
+            </div>
+        </div>
+        <div class="box box2 col-4" id="display">
+        </div>
+    </div>
+    <hr>
+    <span>Updated by Ricky Liang on 3/14/2024</span>
+    <hr>
+</body>
+</html>

@@ -1,10 +1,11 @@
 body {
     background-color: burlywood;
+    overflow:hidden;
 }
 
 body .body {
     background-color: burlywood;
-    padding: 1%;
+    height: auto;
 }
 
 .navbar {
@@ -14,17 +15,25 @@ body .body {
     float: left;
     text-align: center;
     padding: 10px 12px;
-    border-width: 2%;
-    border-color: blueviolet;
     background-color: coral;
 }
+
+.navbar button {
+    float: left;
+    text-align: center;
+    padding: 1%;
+    background-color: coral;
+}
+
+.navbar button:hover {
+    background-color: brown;
+    color: white;
+}
+
 
 .jumbotron {
     text-align: center;
     background-color: blanchedalmond;
-}
-
-.row1 {
 }
 
 .row1 .img1orange {
@@ -34,5 +43,34 @@ body .body {
 
 body .Orange {
     color: orange;
+}
+
+.box {
+    padding: 1%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+.box1 {
+    background-color: lightgrey;
+    background-image:url("images/pexels-jakub-novacek-924824.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 80%;
+    color: white;
+    border-style: solid;
+    border: 2%;
+    border-color: black;
+}
+
+.box2 {
+    background-color: lightgrey;
+    border-style: solid;
+    border: 2%;
+    border-color: black;
 }
 
