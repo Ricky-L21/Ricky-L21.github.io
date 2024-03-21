@@ -7,16 +7,18 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    
     <script type="module">
         const url = 'https://brianobruno.github.io/cats.json';
         const options = {method: 'GET',};
         const response = await fetch(url, options);
         const myObj = await response.json();
-        console.log(myObj);
+        // console.log(myObj);
 
-        let factsArray = myObj['facts'];
-        factsArray = factsArray.sort(function (a, b) {  return a.factId - b.factId;  });
+        var factsArray = myObj['facts'];
+        factsArray = factsArray.sort(function (a, b) {
+            return a.factId - b.factId;  
+        });
 
         // fact_table();
         document.getElementById("catbutton").addEventListener("click", fact_table);
@@ -29,22 +31,22 @@
             table.innerHTML = table.innerHTML + '<tr>' +
               '<th>' + 'FactID' + '</th>' +
               '<th>' + 'Fact' + '</th>' +
-            '</tr>'
+            '</tr>';
 
             factsArray.forEach((facts) => {
                 table.innerHTML = table.innerHTML + `<tr>
                     <td>${facts.factId}</td>
                     <td>${facts.text}</td>
-                </tr>`
+                </tr>`;
             })
-
         }
 
-        let catArr = myObj['catPhoto'];
+        var catArr = myObj['catPhoto'];
         // console.log(catArr);
         document.getElementById("catbutton").addEventListener("click", switchimg);
         function switchimg(){
             document.getElementById("picture").src=catArr;
+            return;
         }
     </script>
 
@@ -53,20 +55,18 @@
 </head>
 <body>
     <div class="navbar align-items-start">
-        <button class="border col" href="index.html">Home</button>
-        <button class="border col" href="lab3.html">Lab3</button>
-        <button class= "border col" href= "lab4.html">Lab4</button>
-        <button class= "border col" href="lab5.html">Lab5</button>
-        <button class= "border col" href="lab6.html">Lab6</button>
+        <a class="border col" href="index.html">Home</a>
+        <a class="border col" href="lab3.html">Lab3</a>
+        <a class= "border col" href= "lab4.html">Lab4</a>
+        <a class= "border col" href="lab5.html">Lab5</a>
+        <a class= "border col" href="lab6.html">Lab6</a>
         <span class="col-5"></span>
-        
     </div>
 
     <div>
-        <img id="picture" src="images/pexels-nisakorn-k-54386.jpg" alt="">
+        <img id="picture" src="images/pexels-nisakorn-k-54386.jpg" alt="Picture to be changed">
         <button id= "catbutton">Cat Facts Not Dogs!</button>
     </div>
-
 
 </body>
 </html>
