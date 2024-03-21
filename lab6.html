@@ -24,21 +24,24 @@
         document.getElementById("catbutton").addEventListener("click", fact_table);
 
         function fact_table() {
-            const table = document.createElement('table');
-
-            document.body.append(table);
-
-            table.innerHTML = table.innerHTML + '<tr>' +
-              '<th>' + 'FactID' + '</th>' +
-              '<th>' + 'Fact' + '</th>' +
-            '</tr>';
-
-            factsArray.forEach((facts) => {
-                table.innerHTML = table.innerHTML + `<tr>
-                    <td>${facts.factId}</td>
-                    <td>${facts.text}</td>
-                </tr>`;
-            })
+            const tableBox = document.getElementById('tableBox');
+            let tablePop = '';
+            tablePop += `
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th>FactID</th>
+                    <th>Fact</th>
+                    </tr>
+                </thead>
+                <tbody>`
+            factsArray.forEach((facts) =>  {
+                tablePop +=
+                    '<tr><td>' + facts.factId + '</td><td>' + facts.text + '</td></tr>'
+                })
+                '</tbody>'
+            '</table>'
+        tableBox.innerHTML += tablePop;
         }
 
         var catArr = myObj['catPhoto'];
@@ -46,8 +49,8 @@
         document.getElementById("catbutton").addEventListener("click", switchimg);
         function switchimg(){
             document.getElementById("picture").src=catArr;
-            return;
         }
+
     </script>
 
 
@@ -63,7 +66,7 @@
         <span class="col-5"></span>
     </div>
 
-    <div>
+    <div id="tableBox">
         <img id="picture" src="images/pexels-nisakorn-k-54386.jpg" alt="Picture to be changed">
         <button id= "catbutton">Cat Facts Not Dogs!</button>
     </div>
