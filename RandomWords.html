@@ -39,6 +39,7 @@
         else if ("rhymes" in myObj && myObj.rhymes.all.length > 0){
         WordRhymes(myObj);
         }
+        // console.log('Btn Clicked');
     }
 
     function WordData(myObj) {
@@ -176,7 +177,7 @@
     <div class="row randomwordcontainer">
         <div class="col">
             <h1>Random Word!</h1>
-            <button class="randombtn" onclick="RandomWord()">Generate Random Word!</button>
+            <button class="randombtn" id="randombtn">Generate Random Word!</button>
             <div class="OptionsButtonBox">
                 <input type="text" name="" id="input" placeholder="Optional: Letter Count">
                 <button class="OptionsButton">
@@ -192,6 +193,9 @@
 
     </div>
     <script>
+        const randombtn = document.getElementById('randombtn');
+        randombtn.addEventListener('click', RandomWord);
+
         const hamburger = document.querySelector(".hamburger");
         const navMenu = document.querySelector(".nav-menu");
 
@@ -204,6 +208,7 @@
             hamburger.classList.remove("active");
             navMenu.classList.remove("active");
         }))
+
     </script>
 </body>
 </html>
