@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="WordsAPI_styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script>
+        async function SearchWord(word, option) {
+        const url = 'https://wordsapiv1.p.rapidapi.com/words/' + word + option;
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': 'c073f762c0msh2c598cd362d2b2ep1b4d97jsn150bdbf23792',
+                'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+            }
+        };
+        const response = await fetch(url, options);
+        const result = await response.text();
+        const myObj = JSON.parse(result);
+        console.log(myObj);
+        if ("results" in myObj || "definitions" in myObj || ("synonyms" in myObj && myObj.synonyms.length > 0) || ("antonyms" in myObj && myObj.antonyms.length > 0) ){
+        WordData(myObj);
+        }
+        else if ("examples" in myObj && myObj.examples.length > 0){
+        WordExamples(myObj);
+        }
+        else if ("rhymes" in myObj && myObj.rhymes.all.length > 0){
+        WordRhymes(myObj);
+        }
+        else {
+            alert("Word does not exist or spelled wrong or does not have any of the critera. Going back to Search Page.");
+            window.location.href = "FinalProjectWordsAPI.html";
+            sessionStorage.clear;
+        }
+    }
+
+        // myObject = JSON.stringify(sessionStorage.getItem("myObject"));
+        // document.getElementById("WordInfo").innerHTML = myObject;
+        console.log(JSON.parse(sessionStorage.getItem("myObject")));
+        myObjStorage = JSON.parse(sessionStorage.getItem("myObject"));
+        if (myObjStorage) {
+        let Word = myObjStorage.word;
+        let Option = myObjStorage.option;
+        console.log(Word)
+        console.log(Option)
+        
+        SearchWord(Word,Option);
+        }
+
+        function WordData(myObj) {
+            let wordresults = '';
+            wordresults += '<div class="word">';
+            wordresults += `<h2 class="h2">Word: ${myObj.word}</h2>`;
+            if("results" in myObj) {
+            wordresults += `<h3>Pronunciation: ${myObj.pronunciation.all} <br> Syllables: ${myObj.syllables.list.join('-')} <br> Frequency: ${myObj.frequency}</h2>`;
+            }
+            wordresults += '</div>';
+            
+            if("results" in myObj) {
+            myObj.results.forEach(result => {
+                wordresults += '<div class="wordbody">';
+                wordresults += `<p><strong>Definition:</strong> ${result.definition}</p>`;
+                wordresults += `<p><strong>Part of Speech:</strong> ${result.partOfSpeech}</p>`;
+                if (result.synonyms) {
+                    wordresults += `<p><strong>Synonyms:</strong> ${result.synonyms.join(', ')}</p>`;
+                }
+                if (result.antonyms) {
+                    wordresults += `<p><strong>Antonyms:</strong> ${result.antonyms.join(', ')}</p>`;
+                }
+                if (result.typeOf) {
+                    wordresults += `<p><strong>Type Of:</strong> ${result.typeOf.join(', ')}</p>`;
+                }
+                if (result.hasTypes) {
+                    wordresults += `<p><strong>Has Types:</strong> ${result.hasTypes.join(', ')}</p>`;
+                }
+                if (result.hasParts) {
+                    wordresults += `<p><strong>Has Parts:</strong> ${result.hasParts.join(', ')}</p>`;
+                }
+                wordresults += '</div>';
+            });
+            }
+            else if("definitions" in myObj) {
+            myObj.definitions.forEach(result => {
+                wordresults += '<div class="wordbody">';
+                wordresults += `<p><strong>Definition:</strong> ${result.definition}</p>`;
+                wordresults += '</div>';
+            });
+            }
+            else if("synonyms" in myObj) {
+                wordresults += '<div class="wordbody">';
+                wordresults += `<h3>Synonyms of ${myObj.word}:</h3>`;
+                wordresults += '<ul>';
+            myObj.synonyms.forEach(result => {
+                wordresults += `<li>${result}</li>`;
+            });
+            wordresults += '</ul>';
+            wordresults += '</div>';
+            }
+            else if("antonyms" in myObj) {
+                wordresults += '<div class="wordbody">';
+                wordresults += `<h3>Antonyms of ${myObj.word}:</h3>`;
+                wordExample += '<ul>';
+            myObj.antonyms.forEach(result => {
+                wordresults += `<li>${result}</li>`;
+            });
+            wordresults += '</ul>';
+            wordresults += '</div>';
+            }
+
+            document.getElementById('WordBox').innerHTML += wordresults;
+        }
+
+        function WordExamples(myObj) {         
+            let wordExample = ''
+            wordExample += '<div class="wordbody">';
+            wordExample += `<h2>Word: ${myObj.word}</h2>`;
+            wordExample += `<h3>Examples using ${myObj.word}:</h3>`;
+            wordExample += '<ul>';
+            myObj.examples.forEach(example => {
+                wordExample += `<li>${example}</li>`;
+            });
+            wordExample += '</ul></div>';
+            document.getElementById('WordBox').innerHTML += wordExample;
+        }
+
+        function WordRhymes(myObj) {        
+            let wordRhyme = ''
+            wordRhyme += '<div class="wordbody">';
+            wordRhyme += `<h2>${myObj.word} rhymes with: </h2>`;
+            myObj.rhymes.all.forEach(rhyme => {
+                wordRhyme += `<li>${rhyme}</li>`;
+            });
+            wordRhyme += '</div>'
+            document.getElementById('WordBox').innerHTML += wordRhyme;
+            }
+
+        // var checkEmpty = document.getElementById('WordBox').innerHTML == null;
+        // if (checkEmpty) {
+        //     let empty = ''
+        //     empty += '<div class = "empty">';
+        //     empty += '<p>Nothing Here Yet! Start searching for words to learn!</p>';
+        //     empty += '</div>';
+        //     document.getElementById('WordBox').innerHTML += empty;
+        // } else {
+        //     document.getElementById('WordBox').innerHTML -= empty;
+        // }
+    </script>
+
+    <title>Word Info</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="FinalProjectWordsAPI.html">
+                        <img src="images/home.png" alt="Home Icon">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="RandomWords.html">
+                        <img src="images/casino.png" alt="Dice icon by juicy_fish on flaticon.com">
+                        Random Words
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="WordsInfo.html">
+                        <img src="images/document.png" alt="Document icon on flaticon.com">
+                        Word Info
+                    </a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="WordBox" id="WordBox"></div>
+    <div class = "ifempty">
+    <p>Nothing Here Yet! Start searching for words to learn!</p>
+    <a class="emptya" href="FinalProjectWordsAPI.html">Start Searching!</a>
+    </div>
+
+
+</body>
+</html>
