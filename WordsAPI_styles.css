@@ -135,7 +135,6 @@ li {
     width: 70%;
     /* height: 30%; */
     border-radius: 40px;
-    position: relative;
     border: 3px solid black;
     margin-bottom: 1vh;
 }
@@ -159,6 +158,9 @@ li {
     padding-inline-start: 70px;
     outline: 0;
 }
+.searchbarbtn {
+    width: 20%;
+}
 
 .searchbar input::placeholder {
     color: black;
@@ -171,9 +173,9 @@ li {
 .searchbar button {
     position: absolute;
     background: transparent;
-    width: 10%;
-    height: 100%;
-    transform: translateX(-1rem);
+    height: 20%;
+    /* transform: translateX(2em); */
+    transform: translateY(15%);
     border: 0;
     transition: transform .7s ease-in-out;
 }
@@ -363,6 +365,7 @@ table td + td {
     align-items: center;
     justify-content: center;
     text-align: center;
+    margin-top: 10%;
 }
 
 .WordBox:empty + .ifempty {
